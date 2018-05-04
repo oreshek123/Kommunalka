@@ -15,6 +15,11 @@ namespace Communalka.Modules
         {
             Pays = new List<Pay>();
         }
+
+        public Pay this[int i]
+        {
+            get { return Pays[i]; }
+        }
         public void ShowAllPays(Service service, Person person)
         {
             string vidop = "Вид оплаты";
@@ -23,10 +28,11 @@ namespace Communalka.Modules
             string itog = "Итого";
             Console.WriteLine("{0,20} | {1,20} | {2,20} | {3,20}",vidop,nach,lgoty,itog ); 
             double sum = 0;
-            foreach (Pay item in Pays)
+          
+            for (int i = 0; i < Pays.Count; i++)
             {
-                Console.WriteLine(service.ShowPay(person, item));
-                sum += item.Total;
+                Console.WriteLine(service.ShowPay(person,service[i]));
+                sum += service[i].Total;
             }
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\n\n\t\t\t\t\t\t\t\t Итого к оплате : {sum}");
